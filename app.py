@@ -4,6 +4,7 @@ from flask_mysqldb import MySQL
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
 from functools import wraps
+import configparser
 
 app = Flask(__name__)
 
@@ -187,5 +188,7 @@ def testpointtable():
 # just keep this in mind before final deployment to web
 
 if __name__ == "__main__" :
-  app.secret_key = 'secret123'
+  config = configparser.ConfigParser()
+  config.read('config.ini')
+  app.secret_key = config['SETTINGS']['SECRET_KEY']
   app.run(debug=True)
