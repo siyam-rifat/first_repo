@@ -181,6 +181,11 @@ def testpointtable():
 
     return render_template('testpointtable.html', table=table)   
 
+# entry point of the app
+# the secret key should be in anothe file named "config.ini", which would not be committed, means
+# it would not be added to the git, now your secret key is leaked to the git since its added, not a big deal,
+# just keep this in mind before final deployment to web
+
 if __name__ == "__main__" :
   app.secret_key = 'secret123'
   app.run(debug=True)
