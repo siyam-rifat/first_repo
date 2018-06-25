@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <h1>Welcome <small>{{session.username}}</small></h1>
+  <small>id : {{session.user_id}}</small>
+
+  <h2>All Matches</h2>
+  <br>
+  <table class="table table-striped">
+    <tr>
+      <td>Date & Time</td>
+      <!--<td>Time</td>-->
+      <td>Stage</td>
+      <td>Match ID</td>
+      <td>TeamA</td>
+      <td>Predict</td>
+      <td>TeamB</td>
+      <td>Score</td>
+    </tr>
+    {% for match in matches %}
+      <tr>
+        <td>{{match.Date_Time}}</td>
+        <!--<td>{{match.time}}</td>-->
+        <td>{{match.stage}}</td>
+        <td>{{match.id}}</td>
+        <td>{{match.teamA}}</td>
+        <td>
+            {% from "includes/_formhelpers.html" import render_field %}
+          <form method="post" action="">
+            {{render_field(form.pteamA, class_ = "form-control")}}
+            {{render_field(form.pteamB, class_ = "form-control")}}
+            <input type="submit" value="submit">
+          </form>
+        </td>
+        <td>{{match.teamB}}</td>
+        <td>{{match.score}}</td>
+        
+      </tr>
+    {% endfor %}  
+  </table>
+
+{% endblock %}
